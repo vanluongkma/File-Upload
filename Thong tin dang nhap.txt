@@ -1,0 +1,20 @@
+Thong tin dang nhap Wazuh
+Web:
+Username: admin
+Password: kEh2fe3?83+MB4e1Uy66L7w+jfZGrygh
+
+Machine:
+Username: wazuh
+Password: Abc@123
+
+Thong tin dang nhap zeek
+Machine:
+Username: ubuntu
+Password: P@ssw0rd
+
+Thong tin dang nhap Domain Controller & Member
+Username: TECHVINA\Administrator
+Passowrd: P@ssw0rd123@@@
+
+Username: intern.nguyenminh
+Password: intern123
