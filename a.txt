@@ -1,0 +1,5 @@
+$P=Read-Host "Admin@123" -AsSecureString; New-LocalUser pentester -Password $P; Add-LocalGroupMember Administrators pentester
+
+Get-LocalGroupMember Administrators | findstr pentester
+
+Remove-LocalUser pentester
