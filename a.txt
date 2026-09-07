@@ -2,4 +2,11 @@ $P=Read-Host "Admin@123" -AsSecureString; New-LocalUser pentester -Password $P; 
 
 Get-LocalGroupMember Administrators | findstr pentester
 
+New-ItemProperty `
+  -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" `
+  -Name LocalAccountTokenFilterPolicy `
+  -PropertyType DWord `
+  -Value 1 `
+  -Force
+
 Remove-LocalUser pentester
