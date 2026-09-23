@@ -1,25 +1,7 @@
-Write-Host "=== 1. RDP SERVICE ==="
-Get-Service TermService
+Set-ItemProperty `
+"HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp" `
+-Name SecurityLayer `
+-Type DWord `
+-Value 0
 
-Write-Host "`n=== 2. RDP LISTENER ==="
-qwinsta
-
-Write-Host "`n=== 3. PORT 3389 ==="
-Get-NetTCPConnection -LocalPort 3389 -State Listen |
-Select LocalAddress,LocalPort,OwningProcess
-
-Write-Host "`n=== 4. PROCESS ==="
-$pid3389 = (Get-NetTCPConnection -LocalPort 3389 -State Listen |
-Select-Object -First 1 -ExpandProperty OwningProcess)
-
-Get-Process -Id $pid3389 -ErrorAction SilentlyContinue
-
-Write-Host "`n=== 5. RDP ENABLED ==="
-Get-ItemProperty `
-"HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server" `
--Name fDenyTSConnections
-
-Write-Host "`n=== 6. RDP SECURITY ==="
-Get-ItemProperty `
-"HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp" |
-Select PortNumber,UserAuthentication,SecurityLayer,MinEncryptionLevel
+Restart-Service TermService -Force
