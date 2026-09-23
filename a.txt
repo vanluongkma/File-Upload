@@ -1,7 +1,16 @@
+$RDP = "HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp"
+
+Get-ItemProperty $RDP |
+Select-Object PortNumber,UserAuthentication,SecurityLayer,MinEncryptionLevel
+
+
 Set-ItemProperty `
 "HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp" `
--Name SecurityLayer `
+-Name UserAuthentication `
 -Type DWord `
 -Value 0
 
-Restart-Service TermService -Force
+
+Get-ItemProperty `
+"HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp" |
+Select PortNumber,UserAuthentication,SecurityLayer
